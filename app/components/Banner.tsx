@@ -3,7 +3,7 @@ import banner from "@/public/banner.png";
 
 const Banner = () => {
     return (
-        <section className="container mx-auto mt-20 pt-6 pb-8 pl-15 bg-[#15171D] rounded-2xl">
+        <section className="container mx-auto px-0.5 mt-20 pt-6 pb-8 pl-15 bg-[#15171D] rounded-2xl">
             <div className="flex items-center justify-between">
 
                 {/* Left side */}
