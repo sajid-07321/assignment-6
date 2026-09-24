@@ -11,7 +11,7 @@ const NavBar = () => {
 
     return (
     <nav className='w-full border-b border-gray-900'>
-        <div className='w-full px-6 md:px-10 lg:px-12 py-4 flex items-center justify-between'>
+        <div className='container mx-auto px-6 md:px-10 lg:px-12 py-4 flex items-center justify-between'>
             {/* left side */}
             <div className='flex items-center gap-2'>
         <Image src={logo} alt="Logo" />

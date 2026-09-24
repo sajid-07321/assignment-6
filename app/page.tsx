@@ -1,10 +1,7 @@
-import Image from "next/image";
+import Banner from "./components/Banner";
 
+const HomePage = () => {
+    return <Banner />;
+};
 
-export default function Home() {
-  return (
-    <>
-      
-    </>
-  );
-}
+export default HomePage;
