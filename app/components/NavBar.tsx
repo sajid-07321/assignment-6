@@ -10,8 +10,8 @@ const NavBar = () => {
     const pathname = usePathname();
 
     return (
-    <nav className='w-full border-b border-gray-900'>
-        <div className=' mx-auto px-6 md:px-10 lg:px-12 py-4 flex items-center justify-between'>
+    <nav className='sticky top-0 z-50 w-full border-b border-gray-900 bg-[#0B0D10]'>
+        <div className='container mx-auto max-w-[1620] md:px-10 lg:px-12 py-4 flex items-center justify-between'>
             {/* left side */}
             <div className='flex items-center gap-2'>
         <Image src={logo} alt="Logo" />

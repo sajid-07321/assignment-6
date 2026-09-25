@@ -1,3 +1,4 @@
+
 import Banner from "../components/Banner";
 import WorkoutCard from "../components/WorkoutCard";
 import { IWorkOut } from "../types/workout";
@@ -16,9 +17,7 @@ const WorkOutPage = async () => {
 
     return (
         <>
-         
-        <Banner/>
-
+        <Banner />
         <section className="container mx-auto px-0.5 py-12">
         {/* Library heading */}
         <div className="mb-8">
