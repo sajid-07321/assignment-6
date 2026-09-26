@@ -1,3 +1,5 @@
+import WorkActions from "@/app/components/WorkActions";
+import WorkoutActions from "@/app/components/WorkoutActions";
 import { IWorkOut } from "@/app/types/workout";
 import Image from "next/image";
 
@@ -183,13 +185,9 @@ const WorkoutDetailsPage = async ({
             {/* Buttons */}
             <div className="mt-7 flex gap-3">
 
-              <button className="rounded-lg bg-[#C2F800] px-5 py-3 text-sm font-semibold text-black transition hover:bg-lime-300">
-                Add to today&apos;s plan
-              </button>
+              <WorkoutActions singleWorkout={singleWorkout} />
 
-              <button className="rounded-lg border border-gray-700 px-5 py-3 text-sm text-white transition hover:border-gray-500">
-                ♡ Save for later
-              </button>
+              <WorkActions singleWorkout={singleWorkout}/>
 
             </div>
 
