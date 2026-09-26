@@ -5,11 +5,32 @@ import Image from "next/image";
 import Link from "next/link";
 
 const MyPlan = () => {
-  const { plan, saved } = useContext(WorkoutContext);
+  const { plan, saved, removeFromPlan, removeFromSaved } =
+    useContext(WorkoutContext);
 
   const [activeTab, setActiveTab] = useState<"plan" | "saved">("plan");
 
-  const currentWorkouts = activeTab === "plan" ? plan : saved;
+  const [sortBy, setSortBy] = useState<"duration" | "calories" | "rating">(
+    "duration",
+  );
+
+  const currentWorkouts = [...(activeTab === "plan" ? plan : saved)].sort(
+    (a, b) => {
+      if (sortBy === "duration") {
+        return b.duration - a.duration;
+      }
+
+      if (sortBy === "calories") {
+        return b.caloriesBurned - a.caloriesBurned;
+      }
+
+      if (sortBy === "rating") {
+        return b.rating - a.rating;
+      }
+
+      return 0;
+    },
+  );
 
   console.log(plan, saved, "plan", "saved");
 
@@ -41,9 +62,9 @@ const MyPlan = () => {
             <p className="text-xs text-gray-500">Minutes</p>
 
             <p className="mt-2 text-2xl font-bold">
-                {currentWorkouts.reduce(
-                  (total: number, workout: (typeof currentWorkouts)[number]) =>
-                    total + workout.duration,
+              {currentWorkouts.reduce(
+                (total: number, workout: (typeof currentWorkouts)[number]) =>
+                  total + workout.duration,
                 0,
               )}
             </p>
@@ -55,7 +76,8 @@ const MyPlan = () => {
 
             <p className="mt-2 text-2xl font-bold">
               {currentWorkouts.reduce(
-                (total: number, workout:(typeof currentWorkouts)[number]) => total + workout.caloriesBurned,
+                (total: number, workout: (typeof currentWorkouts)[number]) =>
+                  total + workout.caloriesBurned,
                 0,
               )}
             </p>
@@ -90,19 +112,26 @@ const MyPlan = () => {
           </div>
 
           {/* Sort */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">Sort By</span>
+          <div className="relative">
+            <span className="absolute -top-2 left-3 z-10 bg-[#0B0D10] px-1.5 text-[10px] font-medium uppercase tracking-wider text-lime-400">
+              Sort
+            </span>
 
             <select
-              className="rounded-md border border-gray-800 bg-[#15181e] px-3 py-2 text-xs text-gray-300 outline-none"
-              defaultValue="duration"
+              value={sortBy}
+              onChange={(e) =>
+                setSortBy(e.target.value as "duration" | "calories" | "rating")
+              }
+              className="cursor-pointer appearance-none rounded-xl border border-gray-800 bg-[#111418] px-4 py-3 pr-11 text-sm font-medium text-gray-300 shadow-sm transition-all hover:border-gray-700 hover:bg-[#15191e] focus:border-lime-500 focus:ring-1 focus:ring-lime-500/30 focus:outline-none"
             >
               <option value="duration">Duration</option>
-
               <option value="calories">Calories</option>
-
               <option value="rating">Rating</option>
             </select>
+
+            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs text-lime-400">
+              ▼
+            </span>
           </div>
         </section>
 
@@ -117,7 +146,7 @@ const MyPlan = () => {
               </p>
             </div>
           ) : (
-            currentWorkouts.map((workout:(typeof currentWorkouts)[number]) => (
+            currentWorkouts.map((workout: (typeof currentWorkouts)[number]) => (
               <div
                 key={workout.id}
                 className="flex items-center gap-4 rounded-xl border border-gray-800 bg-[#15181e] p-3"
@@ -145,17 +174,28 @@ const MyPlan = () => {
 
                 {/* Actions */}
                 <div className="flex items-center gap-2">
-                 <Link href={`/workouts/${workout.id}`}>
-                  <button className="hidden rounded-full border border-gray-700 px-4 py-2 text-xs text-gray-300 hover:border-gray-500 sm:block">
-                    View Details
-                  </button>
-                 </Link>
+                  <Link href={`/workouts/${workout.id}`}>
+                    <button className="hidden rounded-full border border-gray-700 px-4 py-2 text-xs text-gray-300 hover:border-gray-500 sm:block">
+                      View Details
+                    </button>
+                  </Link>
 
                   {activeTab === "plan" && (
                     <button className="rounded-full bg-[#C2F800] px-4 py-2 text-xs font-semibold text-black hover:bg-lime-300">
                       Mark as Done
                     </button>
                   )}
+
+                  <button
+                    onClick={() =>
+                      activeTab === "plan"
+                        ? removeFromPlan(workout.id)
+                        : removeFromSaved(workout.id)
+                    }
+                    className="text-gray-600 hover:text-white"
+                  >
+                    ×
+                  </button>
                 </div>
               </div>
             ))

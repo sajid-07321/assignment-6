@@ -1,6 +1,6 @@
 
 import Image from 'next/image';
-import bicep from '@/public/bicep.png'
+import logo from '@/public/bicep.png'
 
 const Footer = () => {
     return (
@@ -9,10 +9,10 @@ const Footer = () => {
             <div className='container mx-auto flex justify-between items-center'>
             {/* left */}
             <div className='flex gap-2'>
-            <Image src={bicep}
+            <Image src={logo}
             alt='footer logo'
-            width={50}
-            height={50} / >
+            width={40}
+            height={10} / >
             <h4 className='font-bold mt-3'>FITLOG</h4>
             </div>
             {/* right */}

@@ -62,7 +62,7 @@ const NavBar = () => {
 
   <Link
     href="/my-plan"
-    className="flex items-center gap-2 hover:text-lime-400"
+    className="flex items-center gap-2 hover:text-lime-400 "
   >
     <span>Saved</span>
 

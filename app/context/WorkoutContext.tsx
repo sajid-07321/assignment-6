@@ -1,27 +1,35 @@
-"use client"
+"use client";
 
-import React, { createContext, ReactNode, useState } from 'react';
+import React, { createContext, ReactNode, useState } from "react";
 
+export const WorkoutContext = createContext({});
 
-export const WorkoutContext = createContext({})
+const WorkoutProvider = ({ children }: { children: ReactNode }) => {
+  const [plan, setPlan] = useState([]);
+  const [saved, setSaved] = useState([]);
 
+  const removeFromPlan = (id: number) => {
+    setPlan(plan.filter((workout) => workout.id !== id));
+  };
 
-const WorkoutProvider = ({children}: {children:ReactNode} ) => {
+  const removeFromSaved = (id: number) => {
+    setSaved(saved.filter((workout) => workout.id !== id));
+  };
 
-    const [plan, setPlan] = useState([]);
-    const [saved, setSaved] = useState([]);
+  const sharedData = {
+    plan,
+    setPlan,
+    saved,
+    setSaved,
+    removeFromPlan,
+    removeFromSaved,
+  };
 
-    const sharedData = {
-        plan,
-        setPlan,
-        saved,
-        setSaved
-    };
-
-    return <WorkoutContext.Provider value={sharedData}>
-      {children}  
+  return (
+    <WorkoutContext.Provider value={sharedData}>
+      {children}
     </WorkoutContext.Provider>
+  );
 };
-
 
 export default WorkoutProvider;
