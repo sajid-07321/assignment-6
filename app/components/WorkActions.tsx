@@ -10,7 +10,10 @@ const WorkActions = ({
 }: {
   singleWorkout: IWorkOut;
 }) => {
-  const { saved, setSaved } = useContext(WorkoutContext);
+  const { saved, setSaved } = useContext(WorkoutContext) as {
+    saved: IWorkOut[];
+    setSaved: React.Dispatch<React.SetStateAction<IWorkOut[]>>;
+  };
 
   const handleAddToSave = () => {
     const alreadySaved = saved.some(

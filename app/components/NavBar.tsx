@@ -5,11 +5,15 @@ import logo from '@/public/logo.png'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { WorkoutContext } from '../context/WorkoutContext';
+import { IWorkOut } from '../types/workout';
 
 
 const NavBar = () => {
 
-    const { plan, saved } = useContext(WorkoutContext);
+    const { plan, saved } = useContext(WorkoutContext) as {
+      plan: IWorkOut[]
+      saved: React.Dispatch<React.SetStateAction<IWorkOut[]>>;
+    };
     const pathname = usePathname();
 
     return (

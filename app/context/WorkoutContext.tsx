@@ -2,11 +2,13 @@
 
 import React, { createContext, ReactNode, useState } from "react";
 
+type Workout = { id: number };
+
 export const WorkoutContext = createContext({});
 
 const WorkoutProvider = ({ children }: { children: ReactNode }) => {
-  const [plan, setPlan] = useState([]);
-  const [saved, setSaved] = useState([]);
+  const [plan, setPlan] = useState<Workout[]>([]);
+  const [saved, setSaved] = useState<Workout[]>([]);
 
   const removeFromPlan = (id: number) => {
     setPlan(plan.filter((workout) => workout.id !== id));

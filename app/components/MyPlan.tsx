@@ -5,8 +5,30 @@ import Image from "next/image";
 import Link from "next/link";
 
 const MyPlan = () => {
-  const { plan, saved, removeFromPlan, removeFromSaved } =
-    useContext(WorkoutContext);
+  const { plan, saved, removeFromPlan, removeFromSaved } = useContext(
+    WorkoutContext,
+  ) as {
+    plan: Array<{
+      id: string | number;
+      duration: number;
+      caloriesBurned: number;
+      rating: number;
+      image: string;
+      name: string;
+      muscleGroups: string[];
+    }>;
+    saved: Array<{
+      id: string | number;
+      duration: number;
+      caloriesBurned: number;
+      rating: number;
+      image: string;
+      name: string;
+      muscleGroups: string[];
+    }>;
+    removeFromPlan: (id: string | number) => void;
+    removeFromSaved: (id: string | number) => void;
+  };
 
   const [activeTab, setActiveTab] = useState<"plan" | "saved">("plan");
 

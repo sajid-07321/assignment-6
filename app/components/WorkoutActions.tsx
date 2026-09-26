@@ -10,7 +10,10 @@ const WorkoutActions = ({
 }: {
   singleWorkout: IWorkOut;
 }) => {
-  const { plan, setPlan } = useContext(WorkoutContext);
+  const { plan, setPlan } = useContext(WorkoutContext) as {
+    plan: IWorkOut[];
+    setPlan: React.Dispatch<React.SetStateAction<IWorkOut[]>>;
+  };
 
   const handleAddToPlan = () => {
     const alreadyAdded = plan.some(
